@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web Component</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script type="text/javascript" src="assets/js/layout.js"></script>
+    <script type="text/javascript" src="assets/js/button.js"></script>
+
+</head>
+
+<body>
+    <my-nav title="Test"></my-nav>
+    <div class="div-img">
+        <span>Veille Technologique</span>
+    </div>
+    <main>
+
+        <p>Ce site a été élaboré dans le cadre d’une veille technologique et réalisé par Adélaïde LOUIS, étudiante en
+            licence professionnelle DAWIN.</p>
+
+        <p>Le sujet choisi est les <span>Web Components</span>.</p>
+        <div class="w-100 d-flex justify-content-lg-center"><img class="align-self-center" src="assets/img/home/logo.png" alt="logo web component" /></div>
+
+        <p>Un composant est un bloc qui possède une responsabilité unique et qui peut être utilisé sur n’importe quelle
+            page. Ce bloc est appelé via une balise personnalisée qu’on créer nous-même. </p>
+
+        <p>React, Vue.js et Angular possèdent la notion de composant. Cependant, un composant écrit pour un framework
+            n’est pas vraiment compatible avec d’autres.</p>
+
+        <p>Qu’est-ce que les web composants apportent de plus par rapport à des framework déjà existants tels qu'
+            Angular, React, Vue.JS ? Les Web Composants peuvent-ils réaliser des composants inter-projet ?</p>
+        <my-button class="d-flex justify-content-lg-center"></my-button>
+    </main>
+    <my-footer class="w-100"></my-footer>
+</body>
+
+</html>

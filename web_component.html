@@ -1,0 +1,383 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web Component</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/presentation.css">
+    <script type="text/javascript" src="assets/js/layout.js"></script>
+
+</head>
+
+<body>
+    <my-nav></my-nav>
+    <div class="div-img">
+        <span>Web Component</span>
+    </div>
+    <main>
+        <section>
+            <h1>Introduction aux Web Components</h1>
+            <article>
+                <h2>Un composant, c'est quoi ?</h2>
+                <p>Un composant est un bloc qui possède une responsabilité unique et qui peut être utilisé sur n’importe
+                    quelle page. Ce bloc est appelé via une balise personnalisée qu’on créer nous-même.
+                </p>
+                <p> Un composant peut être utilisé n’importe quand. De ce fait, si on a un contenu qui est souvent
+                    affiché, comme un menu, on peut créer un composant ce qui évite la duplication de code.
+                </p>
+            </article>
+            <article>
+                <h2>Point historique sur les Web Components</h2>
+                <p>
+                    Les Web Composants sont présentés pour la première fois lors de la conférence Fronteers en 2011 par
+                    Alex Russell, un ingénieur travaillant chez Google et l’un des co-créateur des web composants. Alex
+                    Russell faisait parti d’un groupe de travail du World Wide Web Consortium (W3C) qui souhaite
+                    standardiser toutes les technologies Web élémentaires (composant d’interface en JS, template côté
+                    client) et simplifier la syntaxe HTML.</p>
+                <p>
+                    Slides de présentation utilisé lors de la présentation au Fronteers : <a
+                        href="https://infrequently.org/11/fronteers/fronteers.html#1">ici</a>
+                    <br>
+                    Vidéo de présentation : <a
+                        href="https://fronteers.nl/congres/2011/sessions/web-components-and-model-driven-views-alex-russell">ici</a>
+                </p>
+                <p>Le lancement des web components a été plutôt compliqué. </p>
+
+                <p>Au début, les web components n'étaient pas compatibles pour tous les navigateurs. C’est seulement en
+                    2016, que les web components sont compatibles sur Chrome. 2018 pour Firefox (avant il fallait
+                    activer un paramètre) et 2020 pour Edge. Pour pouvoir utiliser les Web Components sur un navigateur non compatible, il faut utiliser un polyfill.</p>
+
+                <p>Cette instabilité a créé une certaine méfiance et il est tout à fait normal que peu de développeurs
+                    ont utilisé ces web components et se soient rabattus sur des framework comme React, Angular ou VueJS.
+                </p>
+
+                <p>Aujourd'hui, quand on regarde sur le site can i use, voici les résultats lorsqu'on tape "Web
+                    Component" (voir <a href="https://caniuse.com/?search=web%20component">ici</a>)
+                </p>
+                <p>
+                <figure>
+                    <img class="img" src="assets/img/veille_tech/custom_element.PNG" alt="Can i use - custom element">
+                    <figcaption>Compatibilité navigateur pour les customs elements</figcaption>
+                </figure>
+                </p>
+                <p>
+                <figure>
+                    <img class="img" src="assets/img/veille_tech/html_import.PNG" alt="Can i use - html import">
+                    <figcaption>Compatibilité navigateur pour les HTML imports (aujourd'hui deprecated)</figcaption>
+                </figure>
+                </p>
+                <p>
+                <figure>
+                    <img class="img" src="assets/img/veille_tech/html_template.PNG" alt="Can i use - html template">
+                    <figcaption>Compatibilité navigateur pour les HTML templates</figcaption>
+                </figure>
+                </p>
+                <p>
+                <figure>
+                    <img class="img" src="assets/img/veille_tech/shadom_dom_0.png" alt="Can i use - shadom dom" />
+                    <figcaption>Compatibilité navigateur pour les shadow DOM</figcaption>
+                </figure>
+                </p>
+
+                <p>Aujourd’hui, les web components sont stables et parfaitement utilisables. Ils ne sont pas encore
+                    parfaits mais peuvent représenter une technologie qui peut nous être utile.</p>
+                </p>
+            </article>
+            <article>
+                <h2>Fonctionnement des Web Component</h2>
+                <div>
+                    <p>Comment créer un Web Composant ?
+                        Il y a plusieurs méthodes possibles :
+                    <ul>
+                        <li>de façon native (HTML, CSS, JS)</li>
+                        <li>à l’aide de librairies (Lit de Google, Polymer, Slim, Svelt)
+                        </li>
+                    </ul>
+                    </p>
+                </div>
+                <div>
+                    <h3>Création de composants de façon native</h3>
+                    <p>Un web component est composé de plusieurs technologies distinctes qui permettent la création de
+                        composants d’interface graphique qui sont personnalisables et réutilisables.
+                        Ils font partie du navigateur, il n’y a pas besoin de bibliothèques spécifiques pour que ça
+                        fonctionne.</p>
+
+                    <p>Ces technologies s’élèvent au nombre de quatre : le Custom Element, le HTML template, le shadow
+                        dom
+                        et le ES module.</p>
+
+                    <div>
+                        <h4>A - Custom Element</h4>
+                        <p>
+                            C’est une API qui sert à définir un composant personnalisé. Cela correspond à des balises
+                            HTML custom qui vont englober de l’HTML, et du CSS. Ces balises sont déclarées dans le
+                            CustomElementRegistry.
+                        </p>
+                        <p>
+                            Pour les utiliser, il faut créer une classe qui étend HTMLElement dans un fichier
+                            JavaScript.
+                        <pre>
+                            <code>
+                                class MyComponent extends HTMLElement {
+                                    constructor() {
+                                        super();
+                                    }
+                                }                            
+                            </code>
+                        </pre>
+                        </p>
+                        <p>
+                            Il y a quatres fonctions qui peuvent être appelées selon le cycle de vie du composant.
+                            <code>connectedCallback()</code> est appelé lorsque l'élément personnalisé est connecté pour
+                            la première fois au DOM du document. Il est donc appelé après le constructeur.
+                            <code>attributeChangedCallback()</code> est appelé lorsque l'un des attributs de l'élément
+                            personnalisé est ajouté, supprimé ou modifié.
+                            <code>disconnectedCallback()</code> est appelé quand notre custom element est déconnecté du
+                            DOM du document et <code>adoptedCallback()</code> est appelé lors du déplacement de notre
+                            custom element vers un nouveau document.
+                        </p>
+                        <p>
+                            Pour appeler ce composant dans le fichier HTML, il suffit de renseigner un nom dans le JS
+                            grâce à la méthode define : <code>customElements.define('my-component', MyComponent);</code>
+                            Ce bout de code est donc obligatoire.
+                            Il est possible d’ajouter un champ facultatif : une propriété <code>extends</code>. Celle-ci
+                            indique de quel élément on doit hériter.
+                            <code>customElements.define('word-count', WordCount, { extends: 'p' });</code>
+                        </p>
+                        <p>
+                            Pour appeler le composant dans le fichier HTML c’est simple : il suffit de mettre le nom du
+                            composant choisi entre 2 chevrons, c’est-à-dire comme une balise HTML normale.
+                        <pre>
+                                <code>
+                                    &lt;my-component >&lt;/my-component >
+                                </code>
+                            </pre>
+                        </p>
+                        <p>
+                            Le CustomElementRegistry impose certaines règles :
+                        <ul>
+                            <li>L’élément custom doit se terminer par une balise fermante.</li>
+                            <li>Le nom est un String DOM et contient toujours un tiret. Si on ne met pas de tiret, une
+                                erreur apparaît dans la console.
+                                <br>
+                                <img class="img" src="assets/img/veille_tech/error.PNG" />
+                            </li>
+
+                            <li>Le nom du composant peut apparaître qu’une seule fois dans le CustomElementRegistry.
+                                <pre><code>
+                                    class MyComponent extends HTMLElement {
+                                        constructor() {
+                                            super();
+                                        }
+                                        connectedCallback() {
+                                            this.innerHTML = `&lt;h1>Hello world</h1>`;
+                                        }
+                                    }
+                                    customElements.define('my-component', MyComponent);
+                                 
+                                    class MyComponentV2 extends HTMLElement {
+                                        constructor() {
+                                            super();
+                                        }
+                                        connectedCallback() {
+                                            this.innerHTML = `&lt;h1>Test</h1>`;
+                                        }
+                                    }
+                                    customElements.define('my-component', MyComponentV2);                                
+                            </code></pre>
+                                Ce bout de code va provoquer cette erreur :
+                                <img class="img" src="assets/img/veille_tech/errorV2.PNG" />
+                            </li>
+
+                        </ul>
+                        </p>
+                    </div>
+                    <div>
+                        <h4>B - HTML Template</h4>
+                        <p>Quand on a un bloc qui se répète : même structure, même style, etc, il est judicieux
+                            d’utiliser des HTML Template.</p>
+
+                        <p>Les HTML Template sont des fragments de code présents dans le code HTML via la balise
+                            &lt;template>.</p> La particularité de cette balise est que son contenu est inactif et non
+                        affiché jusqu’à ce qu’elle soit explicitement appelé. C’est-à-dire : même si on écrit du contenu
+                        dans ces balises directement dans le HTML il ne s'affiche pas.
+
+                        <pre>
+                            <code>
+                                &lt;template id=”lorem”>
+                                    &lt;p>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    &lt;/p>
+                                &lt;/template>
+                            </code>
+                        </pre>
+
+
+                        <p>Cet élément et ce qu'il renferme n'est pas directement retranscrit dans le DOM, mais peut
+                            par contre toujours être manipulé avec JavaScript.</p>
+
+                        <pre><code>
+                            let template = document.getElementById('lorem');
+                            document.body.appendChild(template.content);
+                        </code></pre>
+
+                        <p>Quand on ajoute ce bout de code dans le JS, le paragraphe va s'afficher sur notre page.
+                            Cela nous permet par exemple d’optimiser le temps de chargement d’une page.</p>
+
+
+                        <p>Il est possible d’insérer du texte pour chaque instance de ce template. Pour cela,
+                            l’attribut slot va nous être utile. Celui-ci permet de revoir du texte et permet d’avoir un
+                            code plus réutilisable.</p>
+
+
+                    </div>
+                    <div>
+                        <h4>C - Shadow DOM</h4>
+                        <p>
+                            L'encapsulation est un aspect important des composants web. Ici, on parle du fait qu’on est
+                            capable d’avoir une structure de balisage, un style et un comportement totalement séparé du
+                            reste du code. De cette manière, il n’y a aucun conflit entre les deux codes.</p>
+
+                        <p>Le shadow DOM est un sous-niveau du Document Object Model (DOM).
+                            <br />
+                            Déjà qu'est-ce que le DOM ? C'est une interface de programmation pour les documents HTML,
+                            XML et SVG dont la structure est un arbre. Dans cet arbre on y trouve un ensemble de noeuds
+                            et d'objets qui ont leurs méthodes, leurs attributs, etc. On peut le manipuler en modifiant
+                            sa structure (ajouter des noeuds, en supprimer) mais aussi en modifiant son style.
+                            <br />
+                            Chaque DOM a une racine : le Root Element ce qui correspond à la balise html.
+
+                        <figure>
+                            <img class="img" src="assets/img/veille_tech/shadow_dom.png" alt="DOM">
+                            <figcaption>Schéma qui représente un DOM</figcaption>
+                        </figure>
+                        </p>
+                        <p>
+                            Qu'en est-il du shadow DOM ?
+                            <br />
+                            Comme je l'ai dit précédemment, c'est un sous-niveau du DOM. C'est aussi un arbre qui
+                            possède une racine qu'on va appelé shadow root. Cette racine va être créer à partir d'un
+                            élément du DOM d'origine. Cet élément va être appelé shadow host.
+
+                        <figure>
+                            <img class="img" src="assets/img/veille_tech/shadom_dom_2.png" alt=" Shadow DOM">
+                            <figcaption>Schéma qui représente un DOM et un Shadow DOM</figcaption>
+                        </figure>
+                        </p>
+                        <p>
+                            Ce shadow DOM a comme particularité d'être totalement indépendant, il est séparé du code
+                            d'origine. De ce fait, il n'y a aucun conflit entre le DOM et le shadow DOM. On peut
+                            utiliser le shadow DOM si on souhaite que notre custom element ait un style particulier par
+                            exemple.
+                            <br>
+                            Pour l'utiliser, tout doit se faire dans le JavaScript.
+                            Pour l'activer on est obligé d'écrire une certaine ligne de comme que nous verrons à
+                            travers l'un des tutoriels présents sur ce site.
+                        </p>
+                    </div>
+                    <div>
+                        <h4>D - ES Module</h4>
+                        <p>
+                            Les ES Modules sont des modules qui permettent d’intégrer et de réutiliser des documents JS.
+                            <br>
+                            De ce fait on a accès aux objets, aux fonctionnalités et aux variables du fichier JS. Cette
+                            technologie est incluse par défaut dans JS ES6 (version de 2015).
+                        </p>
+                    </div>
+
+                </div>
+                <div>
+                    <h3>Autres manières</h3>
+                    <p>La création de Web Components peut se faire dans des librairies ou des compilateurs. Le
+                        fonctionnement reste le même (utilisation du HTML, JS et CSS pur). La seule chose qui change va
+                        être la syntaxe qui va être simplifier. Le code va devenir plus lisible.
+                    </p>
+                    <p>Il suffit de les installer généralement à l'aide de <code>npm</code> ou de <code>yarn</code></p>
+                    <p>Prenons en exemple la librairie Lit développée par Google. Celle-ci ajout un LitElement qui
+                        hérite de ReactiveElement qui lui hérite de HTMLElement.</p>
+                    <img src="assets/img/veille_tech/lit-element-inheritance.png" alt="LitElement" />
+                    <p>
+                        Ces librairies peuvent proposer des fonctionnalités en plus (réalisation de data-binding,
+                        utilisation de Bootstrap)...
+                    </p>
+                    <p>
+                        Avant Lit, Google avait développé la librairie Polymer qui est sorti en 2015. Cette librairie a
+                        été utilisé pour refaire le site de Youtube ou encore celui de Google Earth. Il y a d'autres
+                        utilisateurs connus : Netflix, IBM et même Coca Cola.
+                        <br>
+                        C'est en 2018, que Google décide de créer un nouveau projet qui reprend ce qui a été fait pour
+                        Polymer tout en l'améliorant : c'est ainsi que Lit est né.
+                    </p>
+                </div>
+            </article>
+            <article>
+                <h2>Concurrence des Web Component</h2>
+                <p>
+                    Pourquoi les Web composants ne sont-ils pas plus utilisés par les développeurs ?
+                </p>
+                <p>
+                    Cette technologie tant promise a eu beaucoup de mal à sortir du lot : après un départ plutôt raté,
+                    des frameworks JS sont très vite apparus et ont très vite été adoptés par les développeurs. Les web
+                    composants ont très vite été mis de côtés par la communauté
+                </p>
+                <p>
+                    J'ai décidé de faire une comparaison avec deux frameworks connus : Angular et Vue.JS. Ils sont tous
+                    les deux des frameworks très utilisés et répandus.
+                </p>
+                <p>AngularJS existe depuis 2009 mais a connu une refonte en 2016. Quant à Vue.js, c'est en 2014 qu'il a
+                    vu le jour.</p>
+
+                <table>
+                    <thead>
+                        <th>Web Component</th>
+                        <th>Angular / Vue.JS</th>
+                    </thead>
+                    <tbody>
+                        <tr class="avantages">
+                            <td>Possibilité de l’utiliser dans tous les projets
+                                <br>
+                                Plus léger car ne nécessite pas d'installation
+                                <br>
+                                Connaissance de base
+                                <br>
+                                Possibilité d'utiliser un polyfill si on possède un navigateur non compatible avec les
+                                Web Component
+                            </td>
+                            <td>Documentation riche
+                                <br>
+                                Possibilité d'incorporer des web components dans le projet
+                                <br>
+                                Possibilité de passer des propriétés (data-binding)
+                            </td>
+                        </tr>
+                        <tr class="inconvenients">
+                            <td>
+                                Technologie qui a mis beaucoup de temps à être stable
+                                <br>
+                                Syntaxe lourde, parfois pas très lisible
+                                <br>
+                                Impossibilité d'utiliser Bootstrap dans les templates et le shadow DOM (nécessite
+                                l'utilisation d'une librairie)
+                                <br>
+                                Impossibilité de faire du data binding en vanilla (nécessite l'utilisation d'une
+                                librairie comme Lit)
+                                <br>
+                                Documentation pas à jour (fonctionnalités dépreciées toujours apparentes dans la
+                                documentation )
+                            </td>
+                            <td>Impossibilité d’utiliser des composants extérieurs au framework et savoir utiliser le framework
+                                <br>
+                                Projet peu devenir lourd
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+    </main>
+    <my-footer class="w-100"></my-footer>
+</body>
+
+</html>

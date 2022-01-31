@@ -1,0 +1,136 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web Component</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/tuto.css">
+    <script type="text/javascript" src="assets/js/layout.js"></script>
+
+</head>
+
+<body>
+    <my-nav></my-nav>
+    <div class="div-img">
+        <span class="ml-lg-4">Tutoriels</span>
+    </div>
+    <main>
+        <section>
+            <article>
+                <h2>Hello World !</h2>
+                <p>Nous allons débuté ce tutoriel par écrire un "Hello World !". Il suffit d'avoir des connaissances en
+                    HTML, CSS et JS.</p>
+                <p>
+                    Commençons par écrire la class HelloWorld dans un fichier JS. Cette classe doit hériter de
+                    HTMLElement. Il ne faut pas oublier de donner un nom au composant grâce à la méthode define.
+                <pre>
+                        <code>
+                            class HelloWorld extends HTMLElement {
+                                constructor() {
+                                    super();
+                                }
+                                connectedCallback() {
+                                    this.innerHTML = `&lt;h1>Hello world&lt;/h1>`;
+                                }
+                            }
+                            customElements.define('hello-world', HelloWorld);
+                        </code>
+                </pre>
+
+                La méthode <code>connectedCallback()</code> est appelé après le constructeur et ici, elle nous permet
+                d'ajouter un titre h1 dans notre composant.
+                </p>
+                Maintenant, dans un fichier HTML, on place notre balise personnalisée dans le body.
+
+                <img src="assets/img/tuto/hello.PNG" />
+            </article>
+            <article>
+                <h2>Réalisation d'un layout</h2>
+                <p>Dans cette partie je vous propose de vous expliquer comment j'ai réalisé le layout du mon site
+                    (header + footer). Comme la partie du header et du footer se répète sur chacune de mes pages, j'ai
+                    décidé de créer un web component pour éviter la duplication de code.</p>
+                <figure>
+                    <img class="img" src="assets/img/tuto/header_item2_selectionned.PNG" alt="Header">
+                    <figcaption>Header avec un item sélectionné</figcaption>
+                </figure>
+                <figure>
+                    <img class="img" src="assets/img/tuto/footer.PNG" alt="Footer">
+                    <figcaption>Footer</figcaption>
+                </figure>
+                <p>Cet exemple manie à la fois le custom element, le html template et le shadow dom.</p>
+                <p>La première étape est de déclarer des classes. J'en ai fait deux : une pour ma nav et l'autre pour le
+                    bas de page.</p>
+                <p>Pour la deuxième étape : on va réaliser un template. Pour cela, dans le fichier JS j'ai ajouté :
+                    <code>const template = document.createElement("template");</code> qui va ajouter une balise template
+                    dans le code. Pour écrire à l'intérieur on va utiliser
+                    <code>innerHTML</code>. Dedant, j'ai pu marqué le style ainsi que le contenu que je souhaitais.
+                </p>
+                <p>Cependant, à ce stade, quand on souhaite voir le rendu : rien de s'affiche ! De plus, notre code
+                    n'apparait pas dans l'inspecteur du navigateur.</p>
+                <p>
+                    Pour résourdre ce problème, il faut rajouter ces deux lignes de code :
+                <pre><code>
+this.attachShadow({ mode: 'open' });
+this.shadowRoot.appendChild(template.content);
+                </code></pre>
+                La première va nous autoriser à modifier le shadom dom, et la seconde va nous permettre d'ajouter le
+                contenu qu'on souhaite à l'intérieur. Ce fragment de code est totalement indépendant.
+                </p>
+                <figure>
+                    <img class="img" src="assets/img/tuto/footer_code.PNG" alt="Code du footer">
+                    <figcaption>Code final du Footer</figcaption>
+                </figure>
+            </article>
+            <article>
+                <h2>Utilisation d'une librairie</h2>
+                <p>Je vais vous présenter la librairie Lit. Cette librairie nous permet de créer des composants de
+                    manières plus rapide et plus claire. On a le choix d'utiliser JS ou TypeScript.</p>
+                <p>Pour l'installer il suffit de taper la commande <code>npm i lit</code></p>
+                <p>Il faut faire une importation dans les fichiers JS
+                    <code>import {LitElement, html} from 'lit';</code>.
+                </p>
+                <p>Créons désormais notre premier composant avec Lit !</p>
+                <p>Dans un fichier JS :
+                <pre>
+                    <code>
+                        import {LitElement, html} from 'lit';
+
+                        class HelloWorld extends LitElement {....
+                        }
+                        customElements.define('hello-word', HelloWorld);
+                    </code>
+                </pre>
+                A ce stade, il n'y a pas de grande différence avec le Hello World que nous avons fait
+                précédemment.<br />
+                Le LitElement est une sous classe de HTMLElement.
+                </p>
+                <p>
+                    Quand on souhaite faire un template : la syntaxe change. Il faut utiliser la méthode
+                    <code>render()</code>.
+                <pre>
+                        <code>
+                            import {LitElement, html} from 'lit';
+
+                            class MyElement extends LitElement {
+                            render() {
+                                return html`&lt;p>Hello from my template.&lt;/p>`;
+                            }
+                            }
+                            customElements.define('my-element', MyElement);
+
+                        </code>
+                    </pre>
+                </p>
+                <p>
+                    Si vous souhaitez approfondir vos connaissances en Lit, je vous conseille le tutoriel intéractif
+                    présent sur le site de lit : <a href="https://lit.dev/tutorial/">ici</a> .
+                </p>
+            </article>
+        </section>
+    </main>
+    <my-footer class="w-100"></my-footer>
+</body>
+
+</html>

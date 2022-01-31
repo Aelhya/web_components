@@ -1,0 +1,28 @@
+main {
+    margin: 2rem;
+}
+
+.div-img {
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(44, 43, 43, 0.5)),
+        url("../img/istockphoto-1047259374-612x612.jpg");
+    background-size: 100%;
+    height: 40%;
+    position: relative;
+}
+
+.div-img span {
+    position: absolute;
+    left: 33%;
+    top: 33%;
+    font-size:3em;
+    color: white;
+}
+
+main > p > span {
+    font-weight: bold;;
+}
+
+figcaption{
+    font-size: 10px;
+}
