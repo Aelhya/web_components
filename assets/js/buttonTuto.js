@@ -43,7 +43,7 @@ templateBtnTuto.innerHTML = `
     right: 0;
   }
 </style>
-<a class="button" href="web_component.html">
+<a class="button" href="tutorials.html">
     <span>Page Tutoriel</span>
 </a>`;
 
