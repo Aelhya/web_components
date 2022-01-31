@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/presentation.css">
     <script type="text/javascript" src="assets/js/layout.js"></script>
-
+    <script type="text/javascript" src="assets/js/buttonTuto.js"></script>
 </head>
 
 <body>
-    <my-nav></my-nav>
+    <my-nav>
+        <p>test</p>
+    </my-nav>
     <div class="div-img">
         <span>Web Component</span>
     </div>
@@ -47,10 +49,12 @@
 
                 <p>Au début, les web components n'étaient pas compatibles pour tous les navigateurs. C’est seulement en
                     2016, que les web components sont compatibles sur Chrome. 2018 pour Firefox (avant il fallait
-                    activer un paramètre) et 2020 pour Edge. Pour pouvoir utiliser les Web Components sur un navigateur non compatible, il faut utiliser un polyfill.</p>
+                    activer un paramètre) et 2020 pour Edge. Pour pouvoir utiliser les Web Components sur un navigateur
+                    non compatible, il faut utiliser un polyfill.</p>
 
                 <p>Cette instabilité a créé une certaine méfiance et il est tout à fait normal que peu de développeurs
-                    ont utilisé ces web components et se soient rabattus sur des framework comme React, Angular ou VueJS.
+                    ont utilisé ces web components et se soient rabattus sur des framework comme React, Angular ou
+                    VueJS.
                 </p>
 
                 <p>Aujourd'hui, quand on regarde sur le site can i use, voici les résultats lorsqu'on tape "Web
@@ -105,7 +109,7 @@
                         fonctionne.</p>
 
                     <p>Ces technologies s’élèvent au nombre de quatre : le Custom Element, le HTML template, le shadow
-                        dom
+                        DOM
                         et le ES module.</p>
 
                     <div>
@@ -229,9 +233,21 @@
 
                         <p>Il est possible d’insérer du texte pour chaque instance de ce template. Pour cela,
                             l’attribut slot va nous être utile. Celui-ci permet de revoir du texte et permet d’avoir un
-                            code plus réutilisable.</p>
+                            code plus réutilisable. Avec slot, on peut différencier le texte dans un custom element plus
+                            facilement</p>
+                        <pre><code>
+                                &lt;my-nav>
+                                    &lt;div name="Test">Test&lt;/div>
+                                    &lt;div name="content">Content&lt;/div>
+                                &lt;/my-nav>
+                                ...
+                                &lt;script>
+                                    const template = document.createElement("template"); // création de la balise &lt;template>
+                                        template.innerHTML = `&lt;slot name="Test">&lt;/slot>`;
+                                &lt;/script>
+                            </code></pre>
 
-
+                        <p>Dans cet exemple, seul la div name="Test" s'affichera car c'est la seule qui est appelée dans le fichier JS.</p>
                     </div>
                     <div>
                         <h4>C - Shadow DOM</h4>
@@ -340,10 +356,10 @@
                                 <br>
                                 Plus léger car ne nécessite pas d'installation
                                 <br>
-                                Connaissance de base
+                                Connaissance de base (HTML, JS, CSS)
                                 <br>
                                 Possibilité d'utiliser un polyfill si on possède un navigateur non compatible avec les
-                                Web Component
+                                Web Components
                             </td>
                             <td>Documentation riche
                                 <br>
@@ -367,15 +383,18 @@
                                 Documentation pas à jour (fonctionnalités dépreciées toujours apparentes dans la
                                 documentation )
                             </td>
-                            <td>Impossibilité d’utiliser des composants extérieurs au framework et savoir utiliser le framework
+                            <td>Impossibilité d’utiliser des composants extérieurs au framework
                                 <br>
                                 Projet peu devenir lourd
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <my-button-tuto class="d-flex justify-content-lg-center"></my-button-tuto>
             </article>
+
         </section>
+
     </main>
     <my-footer class="w-100"></my-footer>
 </body>

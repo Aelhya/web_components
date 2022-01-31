@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/tuto.css">
     <script type="text/javascript" src="assets/js/layout.js"></script>
-
 </head>
 
 <body>
@@ -62,13 +61,27 @@
                 <p>Cet exemple manie à la fois le custom element, le html template et le shadow dom.</p>
                 <p>La première étape est de déclarer des classes. J'en ai fait deux : une pour ma nav et l'autre pour le
                     bas de page.</p>
+                <figure>
+                    <img class="img" src="assets/img/tuto/mNav.PNG" alt="Code de la nav">
+                    <figcaption>Code de la classe</figcaption>
+                </figure>
                 <p>Pour la deuxième étape : on va réaliser un template. Pour cela, dans le fichier JS j'ai ajouté :
                     <code>const template = document.createElement("template");</code> qui va ajouter une balise template
                     dans le code. Pour écrire à l'intérieur on va utiliser
                     <code>innerHTML</code>. Dedant, j'ai pu marqué le style ainsi que le contenu que je souhaitais.
                 </p>
+
+                <figure>
+                    <img class="img" src="assets/img/tuto/mNav_2.png" alt="Code de la nav">
+                    <figcaption>Code du Template de la nav</figcaption>
+                </figure>
                 <p>Cependant, à ce stade, quand on souhaite voir le rendu : rien de s'affiche ! De plus, notre code
-                    n'apparait pas dans l'inspecteur du navigateur.</p>
+                    n'apparait pas dans l'inspecteur du navigateur.
+                <figure>
+                    <img style="width:20%;" class="img" src="assets/img/tuto/my_nav.PNG" alt="Balise nav">
+                    <figcaption>Balise nav vide</figcaption>
+                </figure>
+                </p>
                 <p>
                     Pour résourdre ce problème, il faut rajouter ces deux lignes de code :
                 <pre><code>
@@ -78,6 +91,14 @@ this.shadowRoot.appendChild(template.content);
                 La première va nous autoriser à modifier le shadom dom, et la seconde va nous permettre d'ajouter le
                 contenu qu'on souhaite à l'intérieur. Ce fragment de code est totalement indépendant.
                 </p>
+
+                <figure>
+                    <img style="width:20%;" class="img" src="assets/img/tuto/shadow_dom_nav.PNG" alt="Shadow DOM nav">
+                    <figcaption>Code de la nav qui apparait</figcaption>
+                </figure>
+
+                <p>J'ai répété les mêmes étapes pour faire le footer</p>
+
                 <figure>
                     <img class="img" src="assets/img/tuto/footer_code.PNG" alt="Code du footer">
                     <figcaption>Code final du Footer</figcaption>
@@ -128,6 +149,8 @@ this.shadowRoot.appendChild(template.content);
                     présent sur le site de lit : <a href="https://lit.dev/tutorial/">ici</a> .
                 </p>
             </article>
+
+            <p>Si vous souhaitez apprendre plus au sujet des web components, j'ai recensé des articles et des vidéos qui pourraient vous intéresser. <a href="sources.html">ici</a></p>
         </section>
     </main>
     <my-footer class="w-100"></my-footer>

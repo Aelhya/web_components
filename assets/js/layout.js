@@ -1,4 +1,4 @@
-const template = document.createElement("template");
+const template = document.createElement("template"); // création de la balise <template>
 template.innerHTML = `
 <style>
 nav ul {
@@ -8,11 +8,9 @@ nav ul {
     overflow: hidden;
     background-color: #333;
 }
-
 nav li {
     float: left;
 }
-
 nav li a {
     display: block;
     color: white;
@@ -20,35 +18,31 @@ nav li a {
     padding: 14px 16px;
     text-decoration: none;
 }
-
 nav li a:hover {
     background-color: #111;
 }
 </style>
-
-
 <nav>
     <div id="navbarText">
         <ul>
-            <li><a href="index.html">Accueil</a>
-            </li>
+            <li><a href="index.html">Accueil</a></li>
             <li><a href="web_component.html">Introduction aux composants Web</a></li>
             <li><a href="tutorials.html">Tutoriels</a></li>
             <li><a href="sources.html">Sources</a></li>
         </ul>
     </div>
 </nav>
-`;
+`; // contenu de la balise template
 
 class MyNav extends HTMLElement {
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
-        this.shadowRoot.appendChild(template.content);
+        this.attachShadow({ mode: 'open' });  // autorisation de modifier le shadow DOM
+        this.shadowRoot.appendChild(template.content); // Mettre le contenu du template dans le shadow DOM
     }
 
 }
-customElements.define('my-nav', MyNav);
+customElements.define('my-nav', MyNav); // définir le nom du composant
 
 
 const templateFooter = document.createElement("template"); // création de la balise <template>
