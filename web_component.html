@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -7,14 +8,12 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/presentation.css">
-    <script type="text/javascript" src="assets/js/layout.js"></script>
-    <script type="text/javascript" src="assets/js/buttonTuto.js"></script>
+    <script src="assets/js/layout.js"></script>
+    <script src="assets/js/buttonTuto.js"></script>
 </head>
 
 <body>
-    <my-nav>
-        <p>test</p>
-    </my-nav>
+    <my-nav></my-nav>
     <div class="div-img">
         <span>Web Component</span>
     </div>
@@ -60,46 +59,40 @@
                 <p>Aujourd'hui, quand on regarde sur le site can i use, voici les résultats lorsqu'on tape "Web
                     Component" (voir <a href="https://caniuse.com/?search=web%20component">ici</a>)
                 </p>
-                <p>
                 <figure>
                     <img class="img" src="assets/img/veille_tech/custom_element.PNG" alt="Can i use - custom element">
                     <figcaption>Compatibilité navigateur pour les customs elements</figcaption>
                 </figure>
-                </p>
-                <p>
+
                 <figure>
                     <img class="img" src="assets/img/veille_tech/html_import.PNG" alt="Can i use - html import">
                     <figcaption>Compatibilité navigateur pour les HTML imports (aujourd'hui deprecated)</figcaption>
                 </figure>
-                </p>
-                <p>
+
                 <figure>
                     <img class="img" src="assets/img/veille_tech/html_template.PNG" alt="Can i use - html template">
                     <figcaption>Compatibilité navigateur pour les HTML templates</figcaption>
                 </figure>
-                </p>
-                <p>
+
+
                 <figure>
                     <img class="img" src="assets/img/veille_tech/shadom_dom_0.png" alt="Can i use - shadom dom" />
                     <figcaption>Compatibilité navigateur pour les shadow DOM</figcaption>
                 </figure>
-                </p>
-
                 <p>Aujourd’hui, les web components sont stables et parfaitement utilisables. Ils ne sont pas encore
                     parfaits mais peuvent représenter une technologie qui peut nous être utile.</p>
-                </p>
             </article>
             <article>
                 <h2>Fonctionnement des Web Component</h2>
                 <div>
                     <p>Comment créer un Web Composant ?
                         Il y a plusieurs méthodes possibles :
+                    </p>
                     <ul>
                         <li>de façon native (HTML, CSS, JS)</li>
                         <li>à l’aide de librairies (Lit de Google, Polymer, Slim, Svelt)
                         </li>
                     </ul>
-                    </p>
                 </div>
                 <div>
                     <h3>Création de composants de façon native</h3>
@@ -122,6 +115,7 @@
                         <p>
                             Pour les utiliser, il faut créer une classe qui étend HTMLElement dans un fichier
                             JavaScript.
+                        </p>
                         <pre>
                             <code>
                                 class MyComponent extends HTMLElement {
@@ -131,7 +125,7 @@
                                 }                            
                             </code>
                         </pre>
-                        </p>
+
                         <p>
                             Il y a quatres fonctions qui peuvent être appelées selon le cycle de vie du composant.
                             <code>connectedCallback()</code> est appelé lorsque l'élément personnalisé est connecté pour
@@ -153,20 +147,22 @@
                         <p>
                             Pour appeler le composant dans le fichier HTML c’est simple : il suffit de mettre le nom du
                             composant choisi entre 2 chevrons, c’est-à-dire comme une balise HTML normale.
+                        </p>
                         <pre>
                                 <code>
                                     &lt;my-component >&lt;/my-component >
                                 </code>
                             </pre>
-                        </p>
+
                         <p>
                             Le CustomElementRegistry impose certaines règles :
+                        </p>
                         <ul>
                             <li>L’élément custom doit se terminer par une balise fermante.</li>
                             <li>Le nom est un String DOM et contient toujours un tiret. Si on ne met pas de tiret, une
                                 erreur apparaît dans la console.
                                 <br>
-                                <img class="img" src="assets/img/veille_tech/error.PNG" />
+                                <img class="img" src="assets/img/veille_tech/error.PNG" alt="erreur" />
                             </li>
 
                             <li>Le nom du composant peut apparaître qu’une seule fois dans le CustomElementRegistry.
@@ -176,7 +172,7 @@
                                             super();
                                         }
                                         connectedCallback() {
-                                            this.innerHTML = `&lt;h1>Hello world</h1>`;
+                                            this.innerHTML = `&lt;h1>Hello world&lt;/h1>`;
                                         }
                                     }
                                     customElements.define('my-component', MyComponent);
@@ -186,17 +182,16 @@
                                             super();
                                         }
                                         connectedCallback() {
-                                            this.innerHTML = `&lt;h1>Test</h1>`;
+                                            this.innerHTML = `&lt;h1>Test&lt;/h1>`;
                                         }
                                     }
                                     customElements.define('my-component', MyComponentV2);                                
                             </code></pre>
                                 Ce bout de code va provoquer cette erreur :
-                                <img class="img" src="assets/img/veille_tech/errorV2.PNG" />
+                                <img class="img" src="assets/img/veille_tech/errorV2.PNG" alt="erreur" />
                             </li>
 
                         </ul>
-                        </p>
                     </div>
                     <div>
                         <h4>B - HTML Template</h4>
@@ -247,7 +242,8 @@
                                 &lt;/script>
                             </code></pre>
 
-                        <p>Dans cet exemple, seul la div name="Test" s'affichera car c'est la seule qui est appelée dans le fichier JS.</p>
+                        <p>Dans cet exemple, seul la div name="Test" s'affichera car c'est la seule qui est appelée dans
+                            le fichier JS.</p>
                     </div>
                     <div>
                         <h4>C - Shadow DOM</h4>
@@ -264,24 +260,22 @@
                             sa structure (ajouter des noeuds, en supprimer) mais aussi en modifiant son style.
                             <br />
                             Chaque DOM a une racine : le Root Element ce qui correspond à la balise html.
-
+                        </p>
                         <figure>
                             <img class="img" src="assets/img/veille_tech/shadow_dom.png" alt="DOM">
                             <figcaption>Schéma qui représente un DOM</figcaption>
                         </figure>
-                        </p>
                         <p>
                             Qu'en est-il du shadow DOM ?
                             <br />
                             Comme je l'ai dit précédemment, c'est un sous-niveau du DOM. C'est aussi un arbre qui
                             possède une racine qu'on va appelé shadow root. Cette racine va être créer à partir d'un
                             élément du DOM d'origine. Cet élément va être appelé shadow host.
-
+                        </p>
                         <figure>
                             <img class="img" src="assets/img/veille_tech/shadom_dom_2.png" alt=" Shadow DOM">
                             <figcaption>Schéma qui représente un DOM et un Shadow DOM</figcaption>
                         </figure>
-                        </p>
                         <p>
                             Ce shadow DOM a comme particularité d'être totalement indépendant, il est séparé du code
                             d'origine. De ce fait, il n'y a aucun conflit entre le DOM et le shadow DOM. On peut
@@ -347,8 +341,10 @@
 
                 <table>
                     <thead>
-                        <th>Web Component</th>
-                        <th>Angular / Vue.JS</th>
+                        <tr>
+                            <th>Web Component</th>
+                            <th>Angular / Vue.JS</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr class="avantages">
